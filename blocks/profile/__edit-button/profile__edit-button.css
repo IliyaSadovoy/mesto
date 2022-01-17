@@ -4,7 +4,7 @@
     padding: 0;
     background-color: black;
     margin-left: 18px;
-    margin-top: 4px;
+    margin-top: 6px;
     border: 1px solid white;
 }
 @media screen and (max-width: 615px) {
@@ -13,3 +13,4 @@
         height: 18px;
         margin-left: 10px;
     }
+}

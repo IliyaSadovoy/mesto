@@ -1,0 +1,9 @@
+.place__description{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 25px;
+    padding-right: 15px;
+    padding-left: 21px;
+}
