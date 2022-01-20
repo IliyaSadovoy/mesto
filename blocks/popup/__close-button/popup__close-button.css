@@ -9,7 +9,11 @@
     border: none;
     padding: 0;
     margin-bottom: 8px;
+    cursor: pointer;
     
+}
+.popup__close-button:hover{
+    opacity: 0.6;
 }
 @media screen and (max-width: 615px) {
     .popup__close-button {

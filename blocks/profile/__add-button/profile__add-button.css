@@ -4,8 +4,12 @@
     padding: 0;
     background-color: black;
     border: 1px solid white;
+    cursor: pointer;
 }
 
+.profile__add-button:hover {
+    opacity: 0.6;
+}
 @media screen and (max-width: 615px) {
     .profile__add-button {
         width: 282px;
