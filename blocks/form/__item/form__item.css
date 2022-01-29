@@ -1,5 +1,24 @@
-.form__item{
-    margin: 0;
-    padding: 0;
+.form__item {
+    font-size: 14px;
+    line-height: 17px;
     border: none;
+    margin: 17px 36px 0; 
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2 );
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    min-inline-size: 358px;
+    display: block;
+    outline: 0;
+    
+}
+
+@media screen and (max-width: 615px) {
+    .form__item {
+             
+        margin-left: 22px;
+        margin-right: 22px;
+        min-inline-size: 238px;
+    }
 }

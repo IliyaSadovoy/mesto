@@ -1,18 +1,14 @@
-.footer{
+.footer {
     display: flex;
     max-width: 880px;
     padding-top: 67px;
     margin: 0 auto;
     padding-bottom: 60px;
 }
-@media  screen and (max-width: 615px) {
-    .footer{
-       padding-top: 48px;
-       padding-bottom: 36px;
-    }
-}
-@media  screen and (max-width: 710px) {
-    .footer{
-        
+
+@media screen and (max-width: 615px) {
+    .footer {
+        padding-top: 48px;
+        padding-bottom: 36px;
     }
 }

@@ -5,11 +5,12 @@
     background-image: url("../../../images/Close-Icon.svg");
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0.0001);
+    background-color: rgba(0, 0, 0, 0);
     border: none;
     padding: 0;
     margin-bottom: 8px;
     cursor: pointer;
+    margin-left: auto;
     
 }
 .popup__close-button:hover{

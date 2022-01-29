@@ -16,7 +16,7 @@
     @media screen and (max-width: 615px) {
         .places {
             grid-template-columns: 1fr;
-            justify-items: center;
+           
         }
     }
 }

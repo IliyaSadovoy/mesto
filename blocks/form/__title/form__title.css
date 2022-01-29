@@ -2,6 +2,7 @@
     margin: 0;
     padding-top: 34px;
     padding-left: 36px;
+    padding-bottom: 24px;
     font-weight: 900;
     font-size: 24px;
     line-height: 29px;
@@ -9,6 +10,7 @@
 @media screen and (max-width: 615px) {
     .form__title {
         padding-top: 25px;
+        padding-bottom: 45px;
         padding-left: 22px;
         font-size: 18px;
         line-height: 22px;
