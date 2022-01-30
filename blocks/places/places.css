@@ -12,11 +12,10 @@
         grid-template-columns: repeat(2, 1fr);
         justify-items: center;
     }
+}
 
-    @media screen and (max-width: 615px) {
-        .places {
-            grid-template-columns: 1fr;
-           
-        }
+@media screen and (max-width: 615px) {
+    .places {
+        grid-template-columns: 1fr;
     }
 }
