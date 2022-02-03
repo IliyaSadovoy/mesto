@@ -53,6 +53,7 @@ formElement.addEventListener('submit', formSubmitHandler);
 formAddPlace.addEventListener('submit', formAddPlaceSubmitHandler)
 /*
 <div class="place">
+<button type="button" class="place__remove-button"></button>
         <img class="place__image" src="images/karachaevsk.jpg" alt="фото места">
         <div class="place__description">
           <h2 class="place__name">Карачаевск</h2>
@@ -62,9 +63,20 @@ formAddPlace.addEventListener('submit', formAddPlaceSubmitHandler)
 function clickLike(evt) {
     evt.target.classList.toggle('place__like-button_active');
 }
+/*function removeCard() {
+    const Card = placeRemoveButton.closest('place');
+    Card.remove();
+}*/
 function addPlace(args) {
     const place = document.createElement('div');
     place.classList.add('place');
+    const placeRemoveButton = document.createElement('button');
+    placeRemoveButton.classList.add('place__remove-button')
+    placeRemoveButton.type = 'button';
+    placeRemoveButton.addEventListener('click', function(){
+        const Card = placeRemoveButton.closest('.place');
+        Card.remove();
+    });
     const placeImage = document.createElement('img');
     placeImage.classList.add('place__image');
     placeImage.src = args.link;
@@ -78,7 +90,7 @@ function addPlace(args) {
     placeLikeButton.type = 'button';
     placeLikeButton.addEventListener('click', clickLike);
     const placeNameText = document.createTextNode(args.name);
-    place.append(placeImage, placeDescription);
+    place.append(placeRemoveButton, placeImage, placeDescription);
     placeDescription.append(placeName, placeLikeButton);
     placeName.append(placeNameText);
     places.prepend(place);
