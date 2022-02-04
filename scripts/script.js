@@ -2,17 +2,21 @@ let editButton = document.querySelector('.profile__edit-button');
 let popupEditProfile = document.querySelector('.popup_edit-profile');
 let closeButtonEditProfile = popupEditProfile.querySelector('.popup__close-button');
 let popupAddPlace = document.querySelector('.popup_add-place');
+let popupView = document.querySelector('.popup_view')
+let closeButtonView = popupView.querySelector('.popup__close-button')
 let closeButtonAddPlace = popupAddPlace.querySelector('.popup__close-button');
 let formElement = popupEditProfile.querySelector('.form')
 let formAddPlace = popupAddPlace.querySelector('.form');
-let nameInput = document.querySelector('.form__item_el_name')
-let professionInput = document.querySelector('.form__item_el_profession')
-let nameAddPlace = document.querySelector('.form__item_place_name')
-let placeLink = document.querySelector('.form__item_place_link')
+let nameInput = document.querySelector('.form__item_el_name');
+let professionInput = document.querySelector('.form__item_el_profession');
+let nameAddPlace = document.querySelector('.form__item_place_name');
+let placeLink = document.querySelector('.form__item_place_link');
 let profileName = document.querySelector('.profile__name');
-let profileProfession = document.querySelector('.profile__profession')
-let places = document.querySelector('.places')
-let addButton = document.querySelector('.profile__add-button')
+let profileProfession = document.querySelector('.profile__profession');
+let places = document.querySelector('.places');
+let addButton = document.querySelector('.profile__add-button');
+let popupImage = popupView.querySelector('.popup__image');
+let popupImageName = popupView.querySelector('.popup__image-name');
 function openPopup() {
     nameInput.value = profileName.textContent;
     professionInput.value = profileProfession.textContent;
@@ -28,9 +32,19 @@ function openPopupAddPlace() {
 }
 
 function closePopupAddPlace() {
-    popupAddPlace.classList.remove('popup_opened')
+    popupAddPlace.classList.remove('popup_opened');
 }
 
+function openPopupView(evt) {
+    popupView.classList.add('popup_opened');
+    popupImage.src = evt.target.src;
+    popupImageName.textContent = evt.target.nextSibling.querySelector('.place__name').textContent;
+
+}
+
+function closePopupView() {
+    popupView.classList.remove('popup_opened');
+}
 function formSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
@@ -49,38 +63,28 @@ editButton.addEventListener('click', openPopup);
 closeButtonEditProfile.addEventListener('click', closePopupEditProfile);
 addButton.addEventListener('click', openPopupAddPlace);
 closeButtonAddPlace.addEventListener('click', closePopupAddPlace);
+closeButtonView.addEventListener('click', closePopupView);
 formElement.addEventListener('submit', formSubmitHandler);
 formAddPlace.addEventListener('submit', formAddPlaceSubmitHandler)
-/*
-<div class="place">
-<button type="button" class="place__remove-button"></button>
-        <img class="place__image" src="images/karachaevsk.jpg" alt="фото места">
-        <div class="place__description">
-          <h2 class="place__name">Карачаевск</h2>
-          <button type="button" class="place__like-button"></button>
-        </div>
-      </div>*/
+
 function clickLike(evt) {
     evt.target.classList.toggle('place__like-button_active');
 }
-/*function removeCard() {
-    const Card = placeRemoveButton.closest('place');
-    Card.remove();
-}*/
+function removeCard(evt) {
+    evt.target.closest('.place').remove();
+}
 function addPlace(args) {
     const place = document.createElement('div');
     place.classList.add('place');
     const placeRemoveButton = document.createElement('button');
     placeRemoveButton.classList.add('place__remove-button')
     placeRemoveButton.type = 'button';
-    placeRemoveButton.addEventListener('click', function(){
-        const Card = placeRemoveButton.closest('.place');
-        Card.remove();
-    });
+    placeRemoveButton.addEventListener('click', removeCard);
     const placeImage = document.createElement('img');
     placeImage.classList.add('place__image');
     placeImage.src = args.link;
     placeImage.alt = 'фото места';
+    placeImage.addEventListener('click', openPopupView);
     const placeDescription = document.createElement('div');
     placeDescription.classList.add('place__description');
     const placeName = document.createElement('h2');

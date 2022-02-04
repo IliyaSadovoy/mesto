@@ -1,0 +1,6 @@
+
+@media screen and (min-width: 615px) {
+    .popup__close-button_view {
+        margin-right: -40px;
+    }
+}
