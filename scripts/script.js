@@ -1,71 +1,61 @@
-let editButton = document.querySelector('.profile__edit-button');
-let popupEditProfile = document.querySelector('.popup_edit-profile');
-let closeButtonEditProfile = popupEditProfile.querySelector('.popup__close-button');
-let popupAddPlace = document.querySelector('.popup_add-place');
-let popupView = document.querySelector('.popup_view')
-let closeButtonView = popupView.querySelector('.popup__close-button')
-let closeButtonAddPlace = popupAddPlace.querySelector('.popup__close-button');
-let formElement = popupEditProfile.querySelector('.form')
-let formAddPlace = popupAddPlace.querySelector('.form');
-let nameInput = document.querySelector('.form__item_el_name');
-let professionInput = document.querySelector('.form__item_el_profession');
-let nameAddPlace = document.querySelector('.form__item_place_name');
-let placeLink = document.querySelector('.form__item_place_link');
-let profileName = document.querySelector('.profile__name');
-let profileProfession = document.querySelector('.profile__profession');
-let places = document.querySelector('.places');
-let addButton = document.querySelector('.profile__add-button');
-let popupImage = popupView.querySelector('.popup__image');
-let popupImageName = popupView.querySelector('.popup__image-name');
-function openPopup() {
-    nameInput.value = profileName.textContent;
-    professionInput.value = profileProfession.textContent;
-    popupEditProfile.classList.add('popup_opened');
+const editButton = document.querySelector('.profile__edit-button');
+const popupEditProfile = document.querySelector('.popup_edit-profile');
+const closeButtonEditProfile = popupEditProfile.querySelector('.popup__close-button');
+const popupAddPlace = document.querySelector('.popup_add-place');
+const popupView = document.querySelector('.popup_view')
+const closeButtonView = popupView.querySelector('.popup__close-button')
+const closeButtonAddPlace = popupAddPlace.querySelector('.popup__close-button');
+const formElement = popupEditProfile.querySelector('.form')
+const formAddPlace = popupAddPlace.querySelector('.form');
+const nameInput = document.querySelector('.form__item_el_name');
+const professionInput = document.querySelector('.form__item_el_profession');
+const nameAddPlace = document.querySelector('.form__item_place_name');
+const placeLink = document.querySelector('.form__item_place_link');
+const profileName = document.querySelector('.profile__name');
+const profileProfession = document.querySelector('.profile__profession');
+const places = document.querySelector('.places');
+const addButton = document.querySelector('.profile__add-button');
+const popupImage = popupView.querySelector('.popup__image');
+const popupImageName = popupView.querySelector('.popup__image-name');
+function openPopup(popupElement) {
+    formElement.reset();
+    formAddPlace.reset();
+    popupElement.classList.add('popup_opened');
 }
 
-function closePopupEditProfile() {
-    popupEditProfile.classList.remove('popup_opened')
-}
-
-function openPopupAddPlace() {
-    popupAddPlace.classList.add('popup_opened');
-}
-
-function closePopupAddPlace() {
-    popupAddPlace.classList.remove('popup_opened');
+function closePopup(popupElement) {
+    popupElement.classList.remove('popup_opened')
 }
 
 function openPopupView(evt) {
-    popupView.classList.add('popup_opened');
     popupImage.src = evt.target.src;
     popupImageName.textContent = evt.target.nextSibling.querySelector('.place__name').textContent;
-
+    popupImage.alt = 'фото места';
+    openPopup(popupView);
 }
 
-function closePopupView() {
-    popupView.classList.remove('popup_opened');
-}
-function formSubmitHandler(evt) {
+function SubmitHandlerForm(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileProfession.textContent = professionInput.value;
-    popupEditProfile.classList.remove('popup_opened')
+    closePopup(popupEditProfile);
 }
-function formAddPlaceSubmitHandler(evt) {
+function AddPlaceSubmitHandlerForm(evt) {
     evt.preventDefault();
     addPlace({
         name: nameAddPlace.value,
         link: placeLink.value,
     })
-    popupAddPlace.classList.remove('popup_opened')
+    closePopup(popupAddPlace);
+
 }
-editButton.addEventListener('click', openPopup);
-closeButtonEditProfile.addEventListener('click', closePopupEditProfile);
-addButton.addEventListener('click', openPopupAddPlace);
-closeButtonAddPlace.addEventListener('click', closePopupAddPlace);
-closeButtonView.addEventListener('click', closePopupView);
-formElement.addEventListener('submit', formSubmitHandler);
-formAddPlace.addEventListener('submit', formAddPlaceSubmitHandler)
+editButton.addEventListener('click', function () { openPopup(popupEditProfile); });
+closeButtonEditProfile.addEventListener('click', function () { closePopup(popupEditProfile); });
+addButton.addEventListener('click', function () { openPopup(popupAddPlace); });
+closeButtonAddPlace.addEventListener('click', function () { closePopup(popupAddPlace); });
+closeButtonView.addEventListener('click', function () { closePopup(popupView); });
+formElement.addEventListener('submit', SubmitHandlerForm);
+formAddPlace.addEventListener('submit', AddPlaceSubmitHandlerForm)
 
 function clickLike(evt) {
     evt.target.classList.toggle('place__like-button_active');
@@ -73,7 +63,7 @@ function clickLike(evt) {
 function removeCard(evt) {
     evt.target.closest('.place').remove();
 }
-function addPlace(args) {
+/*function addPlace(args) {
     const place = document.createElement('div');
     place.classList.add('place');
     const placeRemoveButton = document.createElement('button');
@@ -98,7 +88,16 @@ function addPlace(args) {
     placeDescription.append(placeName, placeLikeButton);
     placeName.append(placeNameText);
     places.prepend(place);
-}
+}*/
+function addPlace() {
+    const placeTemplate = document.querySelector('#place-template').content;
+    const placeElement = placeTemplate.querySelector('.place').cloneNode(true);
+  
+    placeElement.querySelector('.place__image').src = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg';
+    placeElement.querySelector('.place__name').textContent = 'Архыз';
+    places.append(placeElement);
+  }
+  addPlace()
 const initialCards = [
     {
         name: 'Архыз',
@@ -125,4 +124,4 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-initialCards.forEach(addPlace);
+//initialCards.forEach(addPlace);
