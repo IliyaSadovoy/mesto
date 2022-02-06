@@ -18,7 +18,6 @@ const addButton = document.querySelector('.profile__add-button');
 const popupImage = popupView.querySelector('.popup__image');
 const popupImageName = popupView.querySelector('.popup__image-name');
 function openPopup(popupElement) {
-    formElement.reset();
     formAddPlace.reset();
     popupElement.classList.add('popup_opened');
 }
@@ -29,8 +28,8 @@ function closePopup(popupElement) {
 
 function openPopupView(evt) {
     popupImage.src = evt.target.src;
-    popupImageName.textContent = evt.target.nextSibling.querySelector('.place__name').textContent;
-    popupImage.alt = 'фото места';
+    popupImageName.textContent = evt.target.alt;
+    popupImage.alt = evt.target.alt;
     openPopup(popupView);
 }
 
@@ -42,10 +41,10 @@ function SubmitHandlerForm(evt) {
 }
 function AddPlaceSubmitHandlerForm(evt) {
     evt.preventDefault();
-    addPlace({
-        name: nameAddPlace.value,
-        link: placeLink.value,
-    })
+    addPlace(
+        nameAddPlace.value,
+        placeLink.value,
+    )
     closePopup(popupAddPlace);
 
 }
@@ -63,41 +62,25 @@ function clickLike(evt) {
 function removeCard(evt) {
     evt.target.closest('.place').remove();
 }
-/*function addPlace(args) {
-    const place = document.createElement('div');
-    place.classList.add('place');
-    const placeRemoveButton = document.createElement('button');
-    placeRemoveButton.classList.add('place__remove-button')
-    placeRemoveButton.type = 'button';
-    placeRemoveButton.addEventListener('click', removeCard);
-    const placeImage = document.createElement('img');
-    placeImage.classList.add('place__image');
-    placeImage.src = args.link;
-    placeImage.alt = 'фото места';
-    placeImage.addEventListener('click', openPopupView);
-    const placeDescription = document.createElement('div');
-    placeDescription.classList.add('place__description');
-    const placeName = document.createElement('h2');
-    placeName.classList.add('place__name');
-    const placeLikeButton = document.createElement('button');
-    placeLikeButton.classList.add('place__like-button');
-    placeLikeButton.type = 'button';
-    placeLikeButton.addEventListener('click', clickLike);
-    const placeNameText = document.createTextNode(args.name);
-    place.append(placeRemoveButton, placeImage, placeDescription);
-    placeDescription.append(placeName, placeLikeButton);
-    placeName.append(placeNameText);
-    places.prepend(place);
-}*/
-function addPlace() {
+
+function createPlace(name, link) {
     const placeTemplate = document.querySelector('#place-template').content;
     const placeElement = placeTemplate.querySelector('.place').cloneNode(true);
-  
-    placeElement.querySelector('.place__image').src = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg';
-    placeElement.querySelector('.place__name').textContent = 'Архыз';
-    places.append(placeElement);
-  }
-  addPlace()
+    const image = placeElement.querySelector('.place__image');
+    image.src = link;
+    image.alt = name;
+    image.addEventListener('click', openPopupView);
+    placeElement.querySelector('.place__name').textContent = name;
+    const placeLikeButton = placeElement.querySelector('.place__like-button');
+    placeLikeButton.addEventListener('click', clickLike);
+    const placeRemoveButton = placeElement.querySelector('.place__remove-button');
+    placeRemoveButton.addEventListener('click', removeCard);
+    return placeElement;
+}
+
+function addPlace(name, link) {
+    places.prepend(createPlace(name, link))
+}
 const initialCards = [
     {
         name: 'Архыз',
@@ -124,4 +107,4 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-//initialCards.forEach(addPlace);
+initialCards.forEach(function (item) { addPlace(item.name, item.link) });
