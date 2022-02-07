@@ -18,7 +18,6 @@ const addButton = document.querySelector('.profile__add-button');
 const popupImage = popupView.querySelector('.popup__image');
 const popupImageName = popupView.querySelector('.popup__image-name');
 function openPopup(popupElement) {
-    formAddPlace.reset();
     popupElement.classList.add('popup_opened');
 }
 
@@ -45,6 +44,7 @@ function AddPlaceSubmitHandlerForm(evt) {
         nameAddPlace.value,
         placeLink.value,
     )
+    formAddPlace.reset();
     closePopup(popupAddPlace);
 
 }
