@@ -32,6 +32,12 @@ function openPopupView(evt) {
     openPopup(popupView);
 }
 
+/*function ESCclose(evt) {
+    if (evt.keyCode == 27) {
+        closePopup();
+          }
+  }*/
+//document.addEventListener('keydown',  closePopup)
 function SubmitHandlerForm(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
@@ -108,3 +114,4 @@ const initialCards = [
     }
 ];
 initialCards.forEach(function (item) { addPlace(item.name, item.link) });
+//document.addEventListener('keydown', function () { closePopup(); })
